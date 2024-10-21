@@ -1,19 +1,19 @@
 public class Task {
     // instance variables
     private String description;
-    private boolean done;
+    private boolean completed;
     private Task nextTask;
 
     // constructor
     public Task() {
         this.description = "";
-        this.done = false;
+        this.completed = false;
         this.nextTask = null;
     }
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.completed = false;
         this.nextTask = null;
     }
 
@@ -26,12 +26,12 @@ public class Task {
         this.description = description;
     }
 
-    public boolean isDone() {
-        return done;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public Task getNextTask() {
