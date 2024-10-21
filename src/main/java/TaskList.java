@@ -2,13 +2,15 @@ public class TaskList {
     // instance variables
     private Task head;
     private Task tail;
-    private int size;
+    private int tasksTotal;
+    private int tasksCompleted;
 
     // constructor
     public TaskList() {
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this.tasksTotal = 0;
+        this.tasksCompleted = 0;
     }
 
     // getters
@@ -20,8 +22,12 @@ public class TaskList {
         return tail;
     }
 
-    public int getSize() {
-        return size;
+    public int getTasksTotal() {
+        return tasksTotal;
+    }
+
+    public int getTasksCompleted() {
+        return tasksCompleted;
     }
 
     public void addTask(String description) {
@@ -35,22 +41,58 @@ public class TaskList {
 
         // always add task at end of list and increment size
         tail = newTask;
-        size++;
+        tasksTotal++;
     }
 
-    public void printTasks(){
-        Task current = head;
-
-        // if the list is empty
-        if (current == null){
-            System.out.println("There is no tasks in the list");
+    public void completeTask(int index) {
+        // check if bad index
+        if (index < 0 || index == tasksTotal) {
+            System.out.println("Invalid index.");
             return;
         }
 
+        Task currentTask = head;
+
+        for (int i = 0; i < index; i++) {
+            currentTask = currentTask.getNextTask();
+        }
+
+        currentTask.setCompleted(true);
+        tasksCompleted++;
+    }
+
+    public void completeTask(String description) {
+        Task currentTask = head;
+
+        while (currentTask != null) {
+            if (currentTask.getDescription().equals(description)) {
+                currentTask.setCompleted(true);
+                tasksCompleted++;
+                return;
+            }
+
+            currentTask = currentTask.getNextTask();
+        }
+    }
+
+    public void printTasks() {
+        Task currentTask = head;
+
+        // if the list is empty
+        if (currentTask == null) {
+            System.out.println("There are no tasks in the list");
+            return;
+        }
+
+
+        System.out.println(tasksCompleted + "/" + tasksTotal);
+
         // print until there is no next task
-        while (current != null){
-            System.out.println(current.getDescription() + (current.isCompleted() ? " completed" : " not completed"));
-            current = current.getNextTask();
+        int elementNum = 1;
+        while (currentTask != null) {
+            System.out.println(elementNum + (currentTask.isCompleted() ? ". ✓ " : ". ○ ") + currentTask.getDescription());
+            currentTask = currentTask.getNextTask();
+            elementNum++;
         }
     }
 }
