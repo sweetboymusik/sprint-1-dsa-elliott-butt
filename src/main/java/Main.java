@@ -42,7 +42,16 @@ public class Main {
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
 
-            int choice = scanner.nextInt();
+            int choice;
+
+            try {
+                choice = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Invalid choice");
+                scanner.nextLine();
+                continue;
+            }
+
             scanner.nextLine();
 
             switch (choice) {
