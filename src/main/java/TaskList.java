@@ -84,9 +84,6 @@ public class TaskList {
             return;
         }
 
-
-        System.out.println(tasksCompleted + "/" + tasksTotal);
-
         // print until there is no next task
         int elementNum = 1;
         while (currentTask != null) {
